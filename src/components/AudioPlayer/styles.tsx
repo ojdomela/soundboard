@@ -7,6 +7,7 @@ export const Container = styled.div`
 
     padding: 1rem;
     margin: 1rem;
+    border-radius: 1rem;
 `;
 
 export const Title = styled.h2`

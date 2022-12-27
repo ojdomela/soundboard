@@ -1,4 +1,4 @@
-import { Title, Slider } from "./styles";
+import { Title, Slider, Container } from "./styles";
 
 interface Props {
   volume: number;
@@ -7,7 +7,7 @@ interface Props {
 
 const VolumeControls: React.FC<Props> = ({ volume, setVolume }) => {
   return (
-    <>
+    <Container>
       <Title>Volume:</Title>
       <Slider
         type="range"
@@ -17,7 +17,7 @@ const VolumeControls: React.FC<Props> = ({ volume, setVolume }) => {
         value={volume}
         onChange={(e) => setVolume(Number(e.target.value))}
       />
-    </>
+    </Container>
   );
 };
 

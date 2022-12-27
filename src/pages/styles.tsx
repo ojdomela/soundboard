@@ -21,6 +21,7 @@ export const Container = styled.ul`
         border: 1px solid ${theme.colors.border};
     `}
 
+    border-radius: 1rem;
     display: flex;
     flex-wrap: wrap;
     padding: 1rem;
