@@ -10,6 +10,10 @@ ${({ theme }: {theme: DefaultTheme}) => css`
   }
 `}
 
+body {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
 *,
 *::before,
 *::after {
