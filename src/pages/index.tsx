@@ -15,7 +15,7 @@ export async function getStaticProps() {
 }
 
 export default function Soundboard({ items }: { items: Asset[] }) {
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(0.5);
   return (
     <>
       <Head>
