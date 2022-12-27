@@ -1,13 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Container = styled.main`
+export const Main = styled.main`
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const Title = styled.h1`
 
 `;
 
-export const PageTitle = styled.h1`
+export const Button = styled.button`
 
 `;
 
-export const DarkModeButton = styled.button`
+export const Container = styled.ul`
+    ${({ theme }) => css`
+        border: 1px solid ${theme.colors.border};
+    `}
 
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    margin: 1rem;
 `;

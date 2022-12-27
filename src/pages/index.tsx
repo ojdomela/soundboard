@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getAssets } from "../../contentful";
 import AudioPlayer from "../components/AudioPlayer";
 import VolumeControls from "../components/VolumeControls";
+import { Container, Title, Button, Main } from "./styles";
 
 export async function getStaticProps() {
   const assets = await getAssets();
@@ -39,18 +40,18 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>Soundboard</h1>
+      <Main>
+        <Title>Soundboard</Title>
         <VolumeControls volume={volume} setVolume={setVolume} />
-        <button onClick={() => setDarkMode(prev => !prev)}>Swap to dark mode?</button>
-        <ul>
+        <Button onClick={() => setDarkMode(prev => !prev)}>Swap to dark mode?</Button>
+        <Container>
           {items.map((item) => (
             <li key={item.sys.id}>
               <AudioPlayer src={item.fields.file.url} title={item.fields.title} volume={volume} />
             </li>
           ))}
-        </ul>
-      </main>
+        </Container>
+      </Main>
     </>
   );
 }

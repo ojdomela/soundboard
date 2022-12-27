@@ -41,6 +41,7 @@ declare module 'global' {
     colors: {
       background: string;
       text: string;
+      border: string;
     };
   }
 }
