@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState(0.25);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: light)").matches) {
