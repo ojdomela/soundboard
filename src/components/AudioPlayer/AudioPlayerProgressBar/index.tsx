@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Description, Slider } from "./styles";
 
 interface Props {
   isPlaying: boolean;
@@ -59,8 +60,8 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
 
   return (
     <>
-      <p>{Math.floor(progress)} / {Math.floor(duration)}</p>
-      <input
+      <Description>{Math.floor(progress)} / {Math.floor(duration)}</Description>
+      <Slider
         type="range"
         min={0}
         max={duration}

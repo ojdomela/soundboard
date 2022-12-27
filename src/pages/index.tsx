@@ -2,7 +2,8 @@ import type { Asset } from "contentful";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { getAssets } from "../../contentful";
-import AudioPlayer from "../components/audioplayer";
+import AudioPlayer from "../components/AudioPlayer";
+import VolumeControls from "../components/VolumeControls";
 
 export async function getStaticProps() {
   const assets = await getAssets();
@@ -40,15 +41,7 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
       </Head>
       <main>
         <h1>Soundboard</h1>
-        <h2>Volume:</h2>
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
-        />
+        <VolumeControls volume={volume} setVolume={setVolume} />
         <button onClick={() => setDarkMode(prev => !prev)}>Swap to dark mode?</button>
         <ul>
           {items.map((item) => (

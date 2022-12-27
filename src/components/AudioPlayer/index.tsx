@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from "react";
-import AudioProgressBar from "./audioprogressbar";
+import { useState, useEffect } from "react";
+import AudioProgressBar from "./AudioPlayerProgressBar";
+import { Container, PlayButton, Title } from "./styles";
 
 interface Props {
   src: string;
@@ -30,11 +31,11 @@ const AudioPlayer: React.FC<Props> = ({ src, volume, title }) => {
   }, []);
 
   return (
-    <div>
-      <h2>{title}</h2>
-      <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Pause' : 'Play'}</button>
+    <Container>
+      <Title>{title}</Title>
+      <PlayButton onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Pause' : 'Play'}</PlayButton>
       <AudioProgressBar isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElement={audioElement} />
-    </div>
+    </Container>
   );
 };
 
