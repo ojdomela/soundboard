@@ -43,7 +43,7 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
       <Main>
         <Title>Soundboard</Title>
         <VolumeControls volume={volume} setVolume={setVolume} />
-        <Button onClick={() => setDarkMode(prev => !prev)}>Swap to dark mode?</Button>
+        <Button onClick={() => setDarkMode(prev => !prev)}>{isDarkMode ? 'Light' : 'Dark'} mode</Button>
         <Container>
           {items.map((item) => (
             <li key={item.sys.id}>
