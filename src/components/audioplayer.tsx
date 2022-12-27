@@ -32,7 +32,7 @@ const AudioPlayer: React.FC<Props> = ({ src, volume, title }) => {
   return (
     <div>
       <h2>{title}</h2>
-      <button onClick={() => setIsPlaying(!isPlaying)}>Play this file</button>
+      <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Pause' : 'Play'}</button>
       <AudioProgressBar isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElement={audioElement} />
     </div>
   );

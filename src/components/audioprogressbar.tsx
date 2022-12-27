@@ -57,13 +57,6 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
     setProgress(audioElement!.currentTime);
   };
 
-  const onScrubEnd = () => {
-    if (!isPlaying) {
-      setIsPlaying(true);
-    }
-    startTimer();
-  };
-
   return (
     <>
       <p>{Math.floor(progress)} / {Math.floor(duration)}</p>
@@ -74,8 +67,6 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
         value={progress}
         step={0.1}
         onChange={(e) => onScrub(Number(e.target.value))}
-        onMouseUp={onScrubEnd}
-        onKeyUp={onScrubEnd}
       />
     </>
   );
