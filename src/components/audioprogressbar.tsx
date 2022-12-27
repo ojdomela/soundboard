@@ -3,46 +3,58 @@ import { useState, useEffect, useRef } from "react";
 interface Props {
   isPlaying: boolean;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  audioRef: React.MutableRefObject<HTMLAudioElement | undefined>;
+  audioElement: HTMLAudioElement | undefined;
 }
 
-const AudioProgressBar = ({ isPlaying, setIsPlaying, audioRef }: Props) => {
+const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
   const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timer | undefined>();
+
+  useEffect(() => {
+    const handler = () => {
+      setDuration(audioElement!.duration);
+    }
+    audioElement?.addEventListener("loadedmetadata", handler);
+    return () => {
+      audioElement?.removeEventListener("loadedmetadata", handler);
+    }
+  }, [audioElement])
 
   useEffect(() => {
     return () => {
       clearInterval(intervalRef.current);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (isPlaying) {
-      audioRef.current?.play();
+      audioElement?.play();
       startTimer();
     } else {
-      audioRef.current?.pause();
+      audioElement?.pause();
       clearInterval(intervalRef.current);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying]);
 
   const startTimer = () => {
     clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
-      if (audioRef.current!.ended) {
+      if (audioElement!.ended) {
         setIsPlaying(false);
       }
-      setProgress(audioRef.current!.currentTime);
+      setProgress(audioElement!.currentTime);
     }, 100);
   };
 
   const onScrub = (value: number) => {
     clearInterval(intervalRef.current);
-    audioRef.current!.currentTime = value;
-    setProgress(audioRef.current!.currentTime);
+    audioElement!.currentTime = value;
+    setProgress(audioElement!.currentTime);
   };
 
   const onScrubEnd = () => {
@@ -53,16 +65,19 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioRef }: Props) => {
   };
 
   return (
-    <input
-      type="range"
-      min={0}
-      max={audioRef.current?.duration || 0}
-      value={progress}
-      step={0.1}
-      onChange={(e) => onScrub(Number(e.target.value))}
-      onMouseUp={onScrubEnd}
-      onKeyUp={onScrubEnd}
-    />
+    <>
+      <p>{Math.floor(progress)} / {Math.floor(duration)}</p>
+      <input
+        type="range"
+        min={0}
+        max={duration}
+        value={progress}
+        step={0.1}
+        onChange={(e) => onScrub(Number(e.target.value))}
+        onMouseUp={onScrubEnd}
+        onKeyUp={onScrubEnd}
+      />
+    </>
   );
 };
 

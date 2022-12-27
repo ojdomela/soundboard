@@ -30,8 +30,6 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
-  console.log(isDarkMode)
-
   return (
     <>
       <Head>

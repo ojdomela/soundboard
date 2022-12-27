@@ -9,29 +9,31 @@ interface Props {
 
 const AudioPlayer: React.FC<Props> = ({ src, volume, title }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const audioRef = useRef<HTMLAudioElement | undefined>(
-    typeof Audio !== "undefined" ? new Audio(src) : undefined
-  );
+  const [audioElement, setAudioElement] = useState<HTMLAudioElement | undefined>(undefined);
 
   useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(src);
-    }
-    audioRef.current.volume = volume;
-  }, [src, volume]);
+    if (!audioElement) {
+      const audio = new Audio(src);
+      audio.volume = volume;
+      setAudioElement(audio);
+    } else {
+      audioElement.volume = volume;
+    }    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [volume]);
 
   useEffect(() => {
     return () => {
-      audioRef.current?.pause();
+      audioElement?.pause();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
       <h2>{title}</h2>
-      <button onClick={() => setIsPlaying(true)}>Play this file</button>
-      <AudioProgressBar isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
+      <button onClick={() => setIsPlaying(!isPlaying)}>Play this file</button>
+      <AudioProgressBar isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElement={audioElement} />
     </div>
   );
 };
