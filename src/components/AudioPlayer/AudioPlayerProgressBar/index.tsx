@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { isMainThread } from "worker_threads";
 import { Description, Slider } from "./styles";
 
 interface Props {
@@ -16,18 +17,18 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
   useEffect(() => {
     const handler = () => {
       setDuration(audioElement!.duration);
-    }
+    };
     audioElement?.addEventListener("loadedmetadata", handler);
     return () => {
       audioElement?.removeEventListener("loadedmetadata", handler);
-    }
-  }, [audioElement])
+    };
+  }, [audioElement]);
 
   useEffect(() => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,9 +59,16 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
     setProgress(audioElement!.currentTime);
   };
 
+  const progressString = `${Math.floor(progress / 60)}:${String(
+    Math.floor(progress % 60)
+  ).padStart(2, "0")}`;
+  const durationString = `${Math.floor(duration / 60)}:${String(
+    Math.floor(duration % 60)
+  ).padStart(2, "0")}`;
+
   return (
     <>
-      <Description>{Math.floor(progress)} / {Math.floor(duration)}</Description>
+      <Description>{`${progressString} / ${durationString}`}</Description>
       <Slider
         type="range"
         min={0}
