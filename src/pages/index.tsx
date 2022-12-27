@@ -1,6 +1,6 @@
 import type { Asset } from "contentful";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getAssets } from "../../contentful";
 import AudioPlayer from "../components/audioplayer";
 
@@ -14,8 +14,24 @@ export async function getStaticProps() {
   };
 }
 
-export default function Soundboard({ items }: { items: Asset[] }) {
+interface Props {
+  items: Asset[];
+  isDarkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
   const [volume, setVolume] = useState(0.5);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+      setDarkMode(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
+  console.log(isDarkMode)
+
   return (
     <>
       <Head>
@@ -35,6 +51,7 @@ export default function Soundboard({ items }: { items: Asset[] }) {
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
         />
+        <button onClick={() => setDarkMode(prev => !prev)}>Swap to dark mode?</button>
         <ul>
           {items.map((item) => (
             <li key={item.sys.id}>

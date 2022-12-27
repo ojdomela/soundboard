@@ -1,6 +1,15 @@
-import { createGlobalStyle } from "styled-components";
+import { DefaultTheme } from 'global';
+import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+
+${({ theme }: {theme: DefaultTheme}) => css`
+  body {
+    background-color: ${theme.colors.background};
+    color: ${theme.colors.text};
+  }
+`}
+
 *,
 *::before,
 *::after {
