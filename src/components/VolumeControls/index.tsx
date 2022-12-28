@@ -16,6 +16,7 @@ const VolumeControls: React.FC<Props> = ({ volume, setVolume }) => {
         step={0.01}
         value={volume}
         onChange={(e) => setVolume(Number(e.target.value))}
+        percentage={volume*100}
       />
     </Container>
   );

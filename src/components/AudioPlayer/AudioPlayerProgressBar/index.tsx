@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { isMainThread } from "worker_threads";
 import { Description, Slider } from "./styles";
 
 interface Props {

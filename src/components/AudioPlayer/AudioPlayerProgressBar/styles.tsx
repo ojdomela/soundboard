@@ -50,7 +50,6 @@ export const Slider = styled.input<SliderProps>`
             transform: translateX(${(percentage / 100) - 0.5}rem);
         `}
 
-        -webkit-appearance: none;
         height: 1.5rem;
         width: 1.5rem;
         border-radius: 2rem;
@@ -65,12 +64,6 @@ export const Slider = styled.input<SliderProps>`
         height: 100%;
     }
 
-    &:focus::-webkit-slider-runnable-track {
-        ${({ theme }) => css`
-            // background: ${theme.colors.primary};
-        `}
-    }
-
     &::-moz-range-track {
         ${({ theme }) => css`
             border: 1px solid ${theme.colors.text};
@@ -79,10 +72,15 @@ export const Slider = styled.input<SliderProps>`
         height: 100%;
     }
 
-    &:focus::-moz-range-track {
+    &:focus::-webkit-slider-runnable-track {
         ${({ theme }) => css`
-            // background: ${theme.colors.text};
+            outline: ${theme.colors.primary};
         `}
     }
 
+    &:focus::-moz-range-track {
+        ${({ theme }) => css`
+            box-shadow: 0 0 1rem ${theme.colors.text};
+        `}
+    }
 `;

@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 export const Main = styled.main`
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -10,7 +9,7 @@ export const Main = styled.main`
 
 export const Container = styled.ul`
     ${({ theme }) => css`
-        border: 1px solid ${theme.colors.text};
+        // border: 1px solid ${theme.colors.text};
     `}
 
     border-radius: 1rem;
