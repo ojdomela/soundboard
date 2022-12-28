@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
 
 ${({ theme }: {theme: DefaultTheme}) => css`
   body {
-    background-color: ${theme.colors.background};
+    background-color: ${theme.colors.secondary};
     color: ${theme.colors.text};
   }
 `}

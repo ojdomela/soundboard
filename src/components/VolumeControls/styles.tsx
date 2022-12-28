@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Container = styled.div`
     ${({ theme }) => css`
-        border: 1px solid ${theme.colors.border};
+        border: 1px solid ${theme.colors.text};
     `}
 
     display: flex;

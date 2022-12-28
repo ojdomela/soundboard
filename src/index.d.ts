@@ -39,9 +39,9 @@ declare module "contentful" {
 declare module 'global' {
   export interface DefaultTheme {
     colors: {
-      background: string;
+      primary: string;
+      secondary: string;
       text: string;
-      border: string;
     };
   }
 }

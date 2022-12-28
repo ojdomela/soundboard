@@ -8,17 +8,9 @@ export const Main = styled.main`
     justify-content: center;
 `;
 
-export const Title = styled.h1`
-
-`;
-
-export const Button = styled.button`
-
-`;
-
 export const Container = styled.ul`
     ${({ theme }) => css`
-        border: 1px solid ${theme.colors.border};
+        border: 1px solid ${theme.colors.text};
     `}
 
     border-radius: 1rem;
