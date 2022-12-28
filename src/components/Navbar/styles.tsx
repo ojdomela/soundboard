@@ -1,6 +1,17 @@
 import styled, { css } from "styled-components";
 
 export const Header = styled.header`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 10rem;
+`;
+
+export const Title = styled.h1`
+  font-size: 3rem;
+`;
+
+export const Wrapper = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.primary};
     color: ${theme.colors.text};
@@ -13,14 +24,7 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 2rem;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 10rem;
-`;
-
-export const Title = styled.h1`
-  font-size: 3rem;
+  height: 100%;
 `;
 
 interface Props {
@@ -84,4 +88,15 @@ export const Indicator = styled.div<Props>`
   transition-timing-function: ease-in-out;
   position: relative;
   z-index: 3;
+`;
+
+export const HamburgerButton = styled.button`
+  display: none;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 `;

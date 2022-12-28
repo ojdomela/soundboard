@@ -24,6 +24,7 @@ interface Props {
 
 export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
   const [volume, setVolume] = useState(0.25);
+  const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const setNewVolume = (volume: number) => {
     setVolume(volume);
     localStorage.setItem("volume", volume.toString());
@@ -48,8 +49,10 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
         setDarkMode={setDarkMode}
         volume={volume}
         setVolume={setNewVolume}
+        collapsed={navbarCollapsed}
+        setCollapsed={setNavbarCollapsed}
       />
-      <Main>
+      <Main navbarCollapse={navbarCollapsed}>
         <Container>
           {items.map((item) => (
             <li key={item.sys.id}>
@@ -66,12 +69,17 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
   );
 }
 
-export const Main = styled.main`
+interface MainProps {
+  navbarCollapse: boolean;
+}
+
+export const Main = styled.main<MainProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10rem;
+    margin-top: ${({ navbarCollapse }) => (navbarCollapse ? "10rem" : "20rem")};
+    transition: margin-top 0.2s ease-in-out;
 `;
 
 export const Container = styled.ul`

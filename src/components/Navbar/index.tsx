@@ -1,13 +1,18 @@
-import { Header, Title, Button, Indicator } from "./styles";
+import {
+  Header,
+  Title,
+  HamburgerButton,
+  Wrapper,
+} from "./styles";
 import Controls from "./Controls";
-import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
 
 interface Props {
   isDarkMode: boolean;
   setDarkMode: (isDarkMode: boolean) => void;
   volume: number;
   setVolume: (volume: number) => void;
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Navbar: React.FC<Props> = ({
@@ -15,29 +20,20 @@ const Navbar: React.FC<Props> = ({
   setDarkMode,
   volume,
   setVolume,
+  collapsed,
+  setCollapsed
 }: Props) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   return (
     <>
       <Header>
-        <Title>Soundboard</Title>
-        <Controls volume={volume} setVolume={setVolume} />
-        <Button
-          toggled={isDarkMode}
-          onClick={() => setDarkMode(!isDarkMode)}
-        >
-          <Indicator
-            toggled={isDarkMode}
-            className={!isLoaded ? "preload" : ""}
-          >
-            {isDarkMode ? <BsFillMoonFill /> : <BsFillSunFill />}
-          </Indicator>
-        </Button>
+        <Wrapper>
+          <Title>Soundboard</Title>
+          <Controls volume={volume} setVolume={setVolume} collapsed={collapsed} isDarkMode={isDarkMode} setDarkMode={setDarkMode} />
+          <HamburgerButton onClick={() => setCollapsed(prev => !prev)}>
+            {collapsed ? 'Show' : 'Hide'} Controls
+          </HamburgerButton>
+        </Wrapper>
       </Header>
     </>
   );
