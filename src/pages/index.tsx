@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { getAssets } from "../../contentful";
 import AudioPlayer from "../components/AudioPlayer";
 import Navbar from "../components/Navbar";
-import VolumeControls from "../components/Navbar/Controls";
-import { Container, Main } from "./styles";
+import styled from "styled-components";
 
 export async function getStaticProps() {
   const assets = await getAssets();
@@ -20,16 +19,19 @@ export async function getStaticProps() {
 interface Props {
   items: Asset[];
   isDarkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setDarkMode: (isDarkMode: boolean) => void;
 }
 
 export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
   const [volume, setVolume] = useState(0.25);
+  const setNewVolume = (volume: number) => {
+    setVolume(volume);
+    localStorage.setItem("volume", volume.toString());
+  }
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-      setDarkMode(false);
-    }
+    const localVolume = localStorage.getItem("volume");
+    if (localVolume) setVolume(Number(localVolume))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,7 +47,7 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
         isDarkMode={isDarkMode}
         setDarkMode={setDarkMode}
         volume={volume}
-        setVolume={setVolume}
+        setVolume={setNewVolume}
       />
       <Main>
         <Container>
@@ -63,3 +65,21 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
     </>
   );
 }
+
+export const Main = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+`;
+
+export const Container = styled.ul`
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin: 1rem;
+`;

@@ -35,13 +35,24 @@ a {
     text-decoration: none;
 }
 
-body.preload, .preload * {
+body.preload, .preload *, .preload *::before, .preload *::after {
     -webkit-transition: none !important;
     -moz-transition: none !important;
     -ms-transition: none !important;
     -o-transition: none !important;
 }
 
+@media (max-width: 768px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 40%;
+    }
+}
 `;
 
 export default GlobalStyle;

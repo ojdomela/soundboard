@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 interface Props {
   isDarkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setDarkMode: (isDarkMode: boolean) => void;
   volume: number;
-  setVolume: React.Dispatch<React.SetStateAction<number>>;
+  setVolume: (volume: number) => void;
 }
 
 const Navbar: React.FC<Props> = ({
@@ -29,7 +29,7 @@ const Navbar: React.FC<Props> = ({
         <Controls volume={volume} setVolume={setVolume} />
         <Button
           toggled={isDarkMode}
-          onClick={() => setDarkMode((prev) => !prev)}
+          onClick={() => setDarkMode(!isDarkMode)}
         >
           <Indicator
             toggled={isDarkMode}

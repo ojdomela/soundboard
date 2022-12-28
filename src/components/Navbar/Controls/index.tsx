@@ -2,7 +2,7 @@ import { Title, Slider, Container } from "./styles";
 
 interface Props {
   volume: number;
-  setVolume: React.Dispatch<React.SetStateAction<number>>;
+  setVolume: (volume: number) => void;
 }
 
 const Controls: React.FC<Props> = ({ volume, setVolume }) => {
