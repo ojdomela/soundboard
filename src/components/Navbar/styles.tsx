@@ -75,11 +75,4 @@ export const Indicator = styled.div<Props>`
   transition: transform 0.2s ease-in-out;
   position: relative;
   z-index: 3;
-
-  &.preload {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
-  }
 `;

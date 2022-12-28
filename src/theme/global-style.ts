@@ -1,9 +1,9 @@
-import { DefaultTheme } from 'global';
-import { createGlobalStyle, css } from 'styled-components';
+import { DefaultTheme } from "global";
+import { createGlobalStyle, css } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
-${({ theme }: {theme: DefaultTheme}) => css`
+${({ theme }: { theme: DefaultTheme }) => css`
   body {
     background-color: ${theme.colors.secondary};
     color: ${theme.colors.text};
@@ -33,6 +33,13 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+body.preload, .preload * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
 }
 
 `;
