@@ -5,6 +5,10 @@ export const Header = styled.header`
     background-color: ${theme.colors.primary};
     color: ${theme.colors.text};
   `}
+
+  transition-property: background-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,7 +20,7 @@ export const Header = styled.header`
 `;
 
 export const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 3rem;
 `;
 
 interface Props {
@@ -38,6 +42,9 @@ export const Button = styled.button<Props>`
     }
   `}
 
+  transition-property: background-color, color, border;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
   width: 4rem;
   height: 2rem;
   border-radius: 2rem;
@@ -72,7 +79,9 @@ export const Indicator = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease-in-out;
+  transition-property: transform, background-color, color, border;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
   position: relative;
   z-index: 3;
 `;

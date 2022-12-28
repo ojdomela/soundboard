@@ -1,8 +1,8 @@
 export const lightTheme = {
     colors: {
-        primary: "#000",
-        secondary: "#fff",
-        text: "#000",
+        primary: "#ccc",
+        secondary: "#eee",
+        text: "#707",
     },
 }
 
