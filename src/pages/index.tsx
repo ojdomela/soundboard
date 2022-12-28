@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getAssets } from "../../contentful";
 import AudioPlayer from "../components/AudioPlayer";
 import Navbar from "../components/Navbar";
-import VolumeControls from "../components/VolumeControls";
+import VolumeControls from "../components/Navbar/Controls";
 import { Container, Main } from "./styles";
 
 export async function getStaticProps() {
@@ -30,9 +30,9 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
     if (window.matchMedia("(prefers-color-scheme: light)").matches) {
       setDarkMode(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Head>
@@ -41,13 +41,21 @@ export default function Soundboard({ items, isDarkMode, setDarkMode }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar isDarkMode={isDarkMode} setDarkMode={setDarkMode} />
+      <Navbar
+        isDarkMode={isDarkMode}
+        setDarkMode={setDarkMode}
+        volume={volume}
+        setVolume={setVolume}
+      />
       <Main>
-        <VolumeControls volume={volume} setVolume={setVolume} />
         <Container>
           {items.map((item) => (
             <li key={item.sys.id}>
-              <AudioPlayer src={item.fields.file.url} title={item.fields.title} volume={volume} />
+              <AudioPlayer
+                src={item.fields.file.url}
+                title={item.fields.title}
+                volume={volume}
+              />
             </li>
           ))}
         </Container>

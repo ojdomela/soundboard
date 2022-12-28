@@ -5,10 +5,10 @@ interface Props {
   setVolume: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const VolumeControls: React.FC<Props> = ({ volume, setVolume }) => {
+const Controls: React.FC<Props> = ({ volume, setVolume }) => {
   return (
     <Container>
-      <Title>Volume:</Title>
+      <Title><span>Volume:</span><span>{Math.round(volume*100)}%</span></Title>
       <Slider
         type="range"
         min={0}
@@ -22,4 +22,4 @@ const VolumeControls: React.FC<Props> = ({ volume, setVolume }) => {
   );
 };
 
-export default VolumeControls;
+export default Controls;

@@ -1,7 +1,15 @@
 import styled, { css } from "styled-components";
 
-export const Description = styled.p`
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+`;
 
+export const Description = styled.p`
+    font-size: 1.5rem;
 `;
 
 interface SliderProps {

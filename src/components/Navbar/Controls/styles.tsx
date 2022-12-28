@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-    ${({ theme }) => css`
-        border: 1px solid ${theme.colors.text};
-    `}
-
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -13,7 +9,11 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
 `;
 
 interface SliderProps {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Description, Slider } from "./styles";
+import { Container, Description, Slider } from "./styles";
 
 interface Props {
   isPlaying: boolean;
@@ -66,7 +66,7 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
   ).padStart(2, "0")}`;
 
   return (
-    <>
+    <Container>
       <Description>{`${progressString} / ${durationString}`}</Description>
       <Slider
         type="range"
@@ -77,7 +77,7 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
         onChange={(e) => onScrub(Number(e.target.value))}
         percentage={Math.round((progress / duration) * 100)}
       />
-    </>
+    </Container>
   );
 };
 
