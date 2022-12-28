@@ -76,6 +76,7 @@ const AudioProgressBar = ({ isPlaying, setIsPlaying, audioElement }: Props) => {
         value={progress}
         step={0.1}
         onChange={(e) => onScrub(Number(e.target.value))}
+        percentage={Math.round((progress / duration) * 100)}
       />
     </>
   );
